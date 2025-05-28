@@ -1,0 +1,10 @@
+flask
+flask-cors
+openai==1.82.0
+python-dotenv
+uvicorn
+pypdf
+langchain
+chromadb
+pytest
+boto3

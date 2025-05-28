@@ -1,0 +1,7 @@
+/backend/chroma
+/backend/.env
+/backend/__pycache__
+/backend/embed.py
+/backend/app.py
+/frontend/node_modules
+requirements.json
