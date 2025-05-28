@@ -35,27 +35,6 @@ def generate_ui():
         print(final_prompt)
         flutter_code = get_flutter_code_with_gpt(final_prompt)
 
-        # # Call OpenAI API to generate UI design
-        # response = client.chat.completions.create(
-        #     model="gpt-4o",
-        #     messages=[ 
-        #         {"role": "system", "content": (
-        #             "You are a top-tier Flutter UI/UX designer and developer. "
-        #             "Generate full Dart code using the latest Flutter and Material 3 best practices. "
-        #             "Create clean, minimal but visually stunning UI with animations, custom components, shadows, rounded corners, and spacing. "
-        #             "Use `main()` and complete structure that works in DartPad. "
-        #             "Avoid deprecated APIs. Use `ElevatedButton`, `TextFormField`, `Container`, `Column`, `Row`, `Padding`, and animations where applicable. "
-        #             "Add interactivity and modern layout structure. No overly basic UIs."
-        #         )},
-        #         {"role": "user", "content": prompt}
-        #     ]
-        # )
-
-        # # Extract the generated design
-        # generated_design = response.choices[0].message.content
-
-        # print(generated_design)
-
         return jsonify({
             'design': flutter_code,
             'status': 'success'
