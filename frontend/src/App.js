@@ -12,7 +12,9 @@ import {
   ThemeProvider,
   createTheme,
   IconButton,
-  Tooltip
+  Tooltip,
+  Switch,
+  FormControlLabel
 } from '@mui/material';
 import axios from 'axios';
 
@@ -102,6 +104,8 @@ function App() {
   const [design, setDesign] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [hasRoundedCorners, setHasRoundedCorners] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,10 +115,13 @@ function App() {
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/generate', {
-        prompt
+        prompt,
+        isDarkTheme,
+        hasRoundedCorners
       });
       const generatedCode = response.data.design;
       setDesign(generatedCode);
+      updateDartPad(generatedCode);
     } catch (err) {
       setError('Failed to generate design. Please try again.');
       console.error(err);
@@ -133,6 +140,16 @@ function App() {
     link.href = URL.createObjectURL(blob);
     link.download = 'flutter_ui.dart';
     link.click();
+  };
+
+  const updateDartPad = (code) => {
+    const iframe = document.getElementById('dartpad-iframe');
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        type: 'updateCode',
+        code: code
+      }, '*');
+    }
   };
 
   return (
@@ -174,20 +191,52 @@ function App() {
                     },
                   }}
                 />
-                <Button 
-                  variant="contained" 
-                  type="submit" 
-                  disabled={loading || !prompt}
-                  fullWidth
-                  sx={{ 
-                    background: 'linear-gradient(45deg, #c084fc, #e879f9)',
-                    '&:hover': {
-                      background: 'linear-gradient(45deg, #e879f9, #c084fc)',
-                    },
-                  }}
-                >
-                  {loading ? <CircularProgress size={24} color="inherit" /> : 'Generate Design'}
-                </Button>
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  mb: 3
+                }}>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={isDarkTheme}
+                          onChange={(e) => setIsDarkTheme(e.target.checked)}
+                          color="secondary"
+                        />
+                      }
+                      label="Dark Theme"
+                      sx={{ color: '#ffffff' }}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={hasRoundedCorners}
+                          onChange={(e) => setHasRoundedCorners(e.target.checked)}
+                          color="secondary"
+                        />
+                      }
+                      label="Rounded Corners"
+                      sx={{ color: '#ffffff' }}
+                    />
+                  </Box>
+                  <Button 
+                    variant="contained" 
+                    type="submit" 
+                    disabled={loading || !prompt}
+                    fullWidth
+                    sx={{ 
+                      maxWidth: '200px',
+                      background: 'linear-gradient(45deg, #c084fc, #e879f9)',
+                      '&:hover': {
+                        background: 'linear-gradient(45deg, #e879f9, #c084fc)',
+                      },
+                    }}
+                  >
+                    {loading ? <CircularProgress size={24} color="inherit" /> : 'Generate Design'}
+                  </Button>
+                </Box>
               </form>
             </Paper>
 
@@ -198,37 +247,57 @@ function App() {
             )}
 
             {design && (
-              <Paper elevation={0} sx={{ p: 4 }}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                  <Typography variant="h6">Generated Code</Typography>
-                  <Box>
-                  <Tooltip title="Copy to Clipboard">
-                    <Button onClick={copyToClipboard} color="secondary" variant="outlined">
-                      Copy Code
-                    </Button>
-                  </Tooltip>
-                  <Tooltip title="Download Code">
-                    <Button onClick={downloadCode} color="secondary" variant="outlined">
-                      Download Code
-                    </Button>
-                  </Tooltip>
+              <>
+                <Paper elevation={0} sx={{ p: 4 }}>
+                  <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                    <Typography variant="h6">Generated Code</Typography>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Tooltip title="Copy to Clipboard">
+                        <Button onClick={copyToClipboard} color="secondary" variant="outlined">
+                          Copy Code
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Download Code">
+                        <Button onClick={downloadCode} color="secondary" variant="outlined">
+                          Download Code
+                        </Button>
+                      </Tooltip>
+                    </Box>
                   </Box>
-                </Box>
-                <Typography 
-                  component="pre" 
-                  sx={{ 
-                    whiteSpace: 'pre-wrap',
-                    fontFamily: 'monospace',
-                    bgcolor: 'rgba(0, 0, 0, 0.3)',
-                    p: 3,
-                    borderRadius: 2,
-                    border: '1px solid rgba(192, 132, 252, 0.2)',
-                    color: '#c084fc',
-                  }}
-                >
-                  {design}
-                </Typography>
-              </Paper>
+                  <Typography 
+                    component="pre" 
+                    sx={{ 
+                      whiteSpace: 'pre-wrap',
+                      fontFamily: 'monospace',
+                      bgcolor: 'rgba(0, 0, 0, 0.3)',
+                      p: 3,
+                      borderRadius: 2,
+                      border: '1px solid rgba(192, 132, 252, 0.2)',
+                      color: '#c084fc',
+                    }}
+                  >
+                    {design}
+                  </Typography>
+                </Paper>
+
+                <Paper elevation={0} sx={{ p: 4 }}>
+                  <Typography variant="h6" gutterBottom>
+                    Live Preview
+                  </Typography>
+                  <iframe
+                    id="dartpad-iframe"
+                    src={`https://dartpad.dev/embed-flutter.html?theme=dark&run=true&code=${design}`}
+                    style={{
+                      width: '100%',
+                      height: '1000px',
+                      border: 'none',
+                      borderRadius: '16px',
+                      boxShadow: '0 0 20px rgba(192, 132, 252, 0.2)',
+                    }}
+                    title="DartPad Preview"
+                  />
+                </Paper>
+              </>
             )}
           </Box>
         </Container>

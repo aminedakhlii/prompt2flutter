@@ -33,7 +33,7 @@ def embed_dart_paths():
     print(f"✅ Embedded {len(docs)} Dart paths.")
 
 # ---- Find Similar Files ----
-def get_similar_files(query, top_k=5):
+def get_similar_files(query, top_k=2):
     embedding_function = get_embedding_function()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
     results = db.similarity_search_with_score(query, k=top_k)
@@ -59,18 +59,21 @@ def load_code_from_files(file_paths):
 PROMPT_TEMPLATE = """
 You are a top-tier Flutter UI/UX designer and developer.
 
-Here are some existing Dart files related to the user request copy widgets and inspire from them:
+Here are some existing Dart files related to the user request, inspire from them to fit the user request:
 
 {context}
 
 Now, based on the user request: "{question}", generate full Dart code using the latest Flutter and Material 3 best practices.
 
-Create clean, minimal but visually stunning apple design like UI with animations, custom components, shadows, rounded corners, and spacing. Use `main()` and complete structure that works in DartPad. Avoid deprecated APIs.
+Dark theme: {isDarkTheme}
+Rounded corners: {hasRoundedCorners}
+
+Create clean, minimal but visually stunning UI with animations, custom components, shadows, rounded corners, and spacing. Use `main()` and complete structure that works in DartPad do not use state management. Avoid deprecated APIs.
 """
 
-def build_prompt(similar_code, user_prompt):
+def build_prompt(similar_code, user_prompt, isDarkTheme, hasRoundedCorners):
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
-    return prompt_template.format(context=similar_code, question=user_prompt)
+    return prompt_template.format(context=similar_code, question=user_prompt, isDarkTheme=isDarkTheme, hasRoundedCorners=hasRoundedCorners)
 
 # ---- GPT-4o Call ----
 def get_flutter_code_with_gpt(prompt):
@@ -85,39 +88,12 @@ def get_flutter_code_with_gpt(prompt):
     )
     return response.choices[0].message.content
 
-# ---- Flask Endpoint ----
-@app.route("/generate", methods=["POST"])
-def generate_flutter_ui():
-    data = request.json
-    user_prompt = data.get("prompt")
-
-    if not user_prompt:
-        return jsonify({"error": "No prompt provided"}), 400
-
-    # Step 1: Find similar Dart files by name
-    similar_files = get_similar_files(user_prompt)
-    if not similar_files:
-        return jsonify({"error": "No similar files found"}), 404
-
-    # Step 2: Load their content
-    context_code = load_code_from_files(similar_files)
-
-    # Step 3: Build and send prompt to GPT
-    final_prompt = build_prompt(context_code, user_prompt)
-    print(final_prompt)
-    flutter_code = get_flutter_code_with_gpt(final_prompt)
-    return jsonify({"code": flutter_code})
-
 # ---- Optional CLI for First-Time Embedding ----
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--embed", action="store_true", help="Embed Dart paths")
-    parser.add_argument("--run", action="store_true", help="Run Flask app")
 
     args = parser.parse_args()
     if args.embed:
         embed_dart_paths()
-
-    if args.run:
-        app.run(debug=True)

@@ -19,6 +19,8 @@ def generate_ui():
     try:
         data = request.json
         prompt = data.get('prompt')
+        isDarkTheme = data.get('isDarkTheme')
+        hasRoundedCorners = data.get('hasRoundedCorners')
         
         if not prompt:
             return jsonify({'error': 'No prompt provided'}), 400
@@ -31,7 +33,7 @@ def generate_ui():
         context_code = load_code_from_files(similar_files)
 
         # Step 3: Build and send prompt to GPT
-        final_prompt = build_prompt(context_code, prompt)
+        final_prompt = build_prompt(context_code, prompt, isDarkTheme, hasRoundedCorners)
         print(final_prompt)
         flutter_code = get_flutter_code_with_gpt(final_prompt)
 
