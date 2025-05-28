@@ -1,6 +1,6 @@
-# prompt2flutter
+# Prompt2Flutter
 
-A minimalist application that generates UI designs from natural language prompts using GPT-4.
+A minimalist application that generates Flutter UI designs from natural language prompts using GPT-4. The generated code is based on a curated collection of Flutter widgets and pages from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project.
 
 ## Project Structure
 
@@ -8,12 +8,26 @@ A minimalist application that generates UI designs from natural language prompts
 .
 ├── backend/
 │   ├── app.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── lib/
+│       ├── widgets/     # Reusable Flutter widgets from Flutter Boilerplate
+│       └── pages/       # Pre-built Flutter pages from Flutter Boilerplate
 └── frontend/
     ├── package.json
     └── src/
         └── App.js
 ```
+
+## Features
+
+- **AI-Powered UI Generation**: Convert natural language prompts into Flutter code using GPT-4
+- **Modern UI Components**: Generates code using Material 3 and modern Flutter best practices
+- **Code Export Options**: 
+  - Copy generated code to clipboard
+  - Download code as a .dart file
+- **Dark Mode UI**: Cyberpunk-inspired dark theme with purple accents
+- **Responsive Design**: Works seamlessly across different screen sizes
+- **Error Handling**: Robust error handling and loading states
 
 ## Setup Instructions
 
@@ -58,16 +72,27 @@ The application will be available at:
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
 
-## Features
+## Usage
 
-- Minimalist UI design
-- Real-time UI design generation using GPT-4
-- Modern Material UI components
-- Responsive layout
-- Error handling and loading states
+1. Enter your UI design prompt in the text field (e.g., "Create a modern login page with email and password fields")
+2. Click "Generate Design" to create the Flutter code
+3. Use the "Copy Code" button to copy the generated code to your clipboard
+4. Or use the "Download Code" button to save the code as a .dart file
 
 ## Technologies Used
 
-- Frontend: React, Material-UI, Axios
-- Backend: Flask, OpenAI GPT-4
-- Development: Node.js, Python 
+- **Frontend**: 
+  - React
+  - Material-UI
+  - Axios
+- **Backend**: 
+  - Flask
+  - OpenAI GPT-4
+  - Flutter Boilerplate components
+- **Development**: 
+  - Node.js
+  - Python
+
+## Credits
+
+This project uses components and best practices from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project, which provides a feature-rich starting point for Flutter applications. 
