@@ -78,7 +78,7 @@ def build_prompt(similar_code, user_prompt, isDarkTheme, hasRoundedCorners):
 # ---- GPT-4o Call ----
 def get_flutter_code_with_gpt(prompt):
     response = openai.chat.completions.create(
-        model="gpt-4o",
+        model="o3-mini",
         messages=[
             {"role": "system", "content": (
                 "Add interactivity and modern layout structure. only output the code, no other text and no comments, keep in mind that headline1, 2... are no longer supported"
