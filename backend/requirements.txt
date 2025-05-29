@@ -8,3 +8,5 @@ langchain
 chromadb
 pytest
 boto3
+langchain-ollama
+langchain-chroma
