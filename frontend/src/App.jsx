@@ -114,7 +114,7 @@ function App() {
     setDesign('');
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/generate', {
+      const response = await axios.post('https://api.prompt2flutter.online/api/generate', {
         prompt,
         isDarkTheme,
         hasRoundedCorners
