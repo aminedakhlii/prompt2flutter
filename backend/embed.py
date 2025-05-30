@@ -83,7 +83,7 @@ def get_flutter_code_with_gpt(prompt):
         model="o3-mini",
         messages=[
             {"role": "system", "content": (
-                "Add interactivity and modern layout structure. only output the code, no other text and no comments, keep in mind that headline1, 2... are no longer supported"
+                "Add interactivity and modern layout structure. only output the code if the code should contain images use this link as the image link for all images 'https://thumbs.dreamstime.com/b/sunset-surfers-ride-waves-maui-tropical-coastline-splashing-fun-generated-ai-sunset-surfers-ride-waves-maui-tropical-307937284.jpg' , no other text and no comments, keep in mind that headline1, 2... are no longer supported"
             )},
             {"role": "user", "content": prompt}
         ]
