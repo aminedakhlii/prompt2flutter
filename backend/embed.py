@@ -33,7 +33,7 @@ def embed_dart_paths():
     print(f"✅ Embedded {len(docs)} Dart paths.")
 
 # ---- Find Similar Files ----
-def get_similar_files(query, top_k=2):
+def get_similar_files(query, top_k=5):
     embedding_function = get_embedding_function()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
     results = db.similarity_search_with_score(query, k=top_k)
