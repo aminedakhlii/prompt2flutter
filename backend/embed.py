@@ -68,6 +68,8 @@ Now, based on the user request: "{question}", generate full Dart code using the 
 Dark theme: {isDarkTheme}
 Rounded corners: {hasRoundedCorners}
 
+if the code should contain images use this link as the image link for all images 'https://thumbs.dreamstime.com/b/sunset-surfers-ride-waves-maui-tropical-coastline-splashing-fun-generated-ai-sunset-surfers-ride-waves-maui-tropical-307937284.jpg' 
+
 Create clean, minimal but visually stunning UI with animations, custom components, shadows, rounded corners, and spacing. Use `main()` and complete structure that works in DartPad do not use state management. Avoid deprecated APIs.
 """
 
