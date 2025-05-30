@@ -1,6 +1,6 @@
 # Prompt2Flutter
 
-A minimalist application that generates Flutter UI designs from natural language prompts using GPT-4. The generated code is based on a curated collection of Flutter widgets and pages from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project.
+A minimalist application that generates Flutter UI designs from natural language prompts using o3-mini. The generated code is based on a curated collection of Flutter widgets and pages from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project.
 
 ## Project Structure
 
@@ -9,6 +9,7 @@ A minimalist application that generates Flutter UI designs from natural language
 ├── backend/
 │   ├── app.py
 │   ├── requirements.txt
+│   ├── embed.py
 │   └── lib/
 │       ├── widgets/     # Reusable Flutter widgets from Flutter Boilerplate
 │       └── pages/       # Pre-built Flutter pages from Flutter Boilerplate
@@ -50,7 +51,12 @@ pip install -r requirements.txt
 OPENAI_API_KEY=your_api_key_here
 ```
 
-4. Run the Flask server:
+4. Run the embedding script to prepare the Flutter components:
+```bash
+python embed.py --embed
+```
+
+5. Run the Flask server:
 ```bash
 python app.py
 ```
@@ -65,7 +71,7 @@ npm install
 
 2. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
 The application will be available at:
@@ -87,7 +93,7 @@ The application will be available at:
   - Axios
 - **Backend**: 
   - Flask
-  - OpenAI GPT-4
+  - OpenAI o3-mini
   - Flutter Boilerplate components
 - **Development**: 
   - Node.js
@@ -95,4 +101,8 @@ The application will be available at:
 
 ## Credits
 
-This project uses components and best practices from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project, which provides a feature-rich starting point for Flutter applications. 
+This project uses components and best practices from the [Flutter Boilerplate](https://github.com/IkramKhan-DevOps/flutter_boilerplate) project, which provides a feature-rich starting point for Flutter applications.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details. 
