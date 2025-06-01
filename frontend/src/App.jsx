@@ -207,7 +207,8 @@ function AppContent() {
 
         try {
             if (currentUser.remaining_requests <= 0) {
-                setError('You have no remaining requests. Please upgrade your plan.');
+                console.log('No remaining requests, showing payment plans');
+                setShowPaymentPlans(true);
                 return;
             }
 

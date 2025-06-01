@@ -154,7 +154,7 @@ export default function Login() {
 
                         {/* RIGHT SIDE: Dynamic Demo/Screenshot */}
                         <Box sx={{
-                            flex: 4,
+                            flex: 1,
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
