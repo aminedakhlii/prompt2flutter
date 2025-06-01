@@ -5,3 +5,6 @@
 requirements.json
 /backend/p2f
 /frontend/build
+/frontend/.env
+/frontend/src/firebase.js
+/backend/serviceAccount.json

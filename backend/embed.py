@@ -55,7 +55,7 @@ def load_code_from_files(file_paths):
             print(f"⚠️ Error reading {path}: {e}")
     return "\n\n".join(contents)
 
-# ---- Build Prompt ----
+# ---- Build Prompt with no edit ----
 PROMPT_TEMPLATE = """
 You are a top-tier Flutter UI/UX designer and developer.
 
@@ -73,9 +73,35 @@ if the code should contain images use this link as the image link for all images
 Create clean, minimal but visually stunning UI with animations, custom components, shadows, rounded corners, and spacing. Use `main()` and complete structure that works in DartPad do not use state management. Avoid deprecated APIs.
 """
 
-def build_prompt(similar_code, user_prompt, isDarkTheme, hasRoundedCorners):
+# ---- Build Prompt with edit ----
+PROMPT_TEMPLATE_EDIT = """
+You are a top-tier Flutter UI/UX designer and developer.
+
+Here are some existing Dart files related to the user request, inspire from them to fit the user request:
+
+{context}
+
+Here is the code that the user wants to edit:
+
+{toEdit}
+
+Now, based on the user request: "{question}", generate full Dart code using the latest Flutter and Material 3 best practices.
+
+Dark theme: {isDarkTheme}
+Rounded corners: {hasRoundedCorners}
+
+"""
+
+def build_prompt(similar_code, user_prompt, isDarkTheme, hasRoundedCorners, toEdit):
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
-    return prompt_template.format(context=similar_code, question=user_prompt, isDarkTheme=isDarkTheme, hasRoundedCorners=hasRoundedCorners)
+    if toEdit:
+        prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE_EDIT)
+        prompt = prompt_template.format(context=similar_code, question=user_prompt, isDarkTheme=isDarkTheme, hasRoundedCorners=hasRoundedCorners, toEdit=toEdit)
+        return prompt
+    else:
+        prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
+        prompt = prompt_template.format(context=similar_code, question=user_prompt, isDarkTheme=isDarkTheme, hasRoundedCorners=hasRoundedCorners)
+        return prompt
 
 # ---- GPT-4o Call ----
 def get_flutter_code_with_gpt(prompt):

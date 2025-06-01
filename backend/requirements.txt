@@ -1,6 +1,6 @@
 flask
 flask-cors
-openai==1.82.0
+openai
 python-dotenv
 uvicorn
 pypdf
@@ -10,3 +10,7 @@ pytest
 boto3
 langchain-ollama
 langchain-chroma
+firebase-admin
+stripe
+SQLAlchemy
+psycopg2-binary
