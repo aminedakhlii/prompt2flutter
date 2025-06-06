@@ -68,7 +68,7 @@ export default function PaymentSuccess() {
 
         if (sessionId) {
             // Fetch the session details from your backend
-            fetch(`http://127.0.0.1:5000/api/payment/success?session_id=${sessionId}`)
+            fetch(`https://api.prompt2flutter.online/api/payment/success?session_id=${sessionId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {

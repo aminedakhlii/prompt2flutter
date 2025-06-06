@@ -45,8 +45,8 @@ def create_payment_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=f'http://localhost:3000/payment-success?session_id={{CHECKOUT_SESSION_ID}}',
-            cancel_url='http://localhost:3000/payment-cancelled',
+            success_url=f'http://prompt2flutter.online/payment-success?session_id={{CHECKOUT_SESSION_ID}}',
+            cancel_url='http://prompt2flutter.online',
             metadata={
                 'user_id': user_id
             }

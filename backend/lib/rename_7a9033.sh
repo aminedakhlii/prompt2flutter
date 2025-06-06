@@ -1,4 +1,4 @@
-find . -type f | while read -r file; do
+find ./modern_dashboard -type f | while read -r file; do
   # Strip leading './' and convert slashes to underscores
   newname=$(echo "$file" | sed 's|^\./||' | tr '/' '_')
   

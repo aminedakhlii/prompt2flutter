@@ -233,7 +233,7 @@ function AppContent() {
             await addMessage(userMessage, true, conversation.id);
 
             // Send request to backend
-            const response = await fetch('http://127.0.0.1:5000/api/generate', {
+            const response = await fetch('https://api.prompt2flutter.online/api/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -100,7 +100,7 @@ export default function PaymentPlans() {
             const stripe = await stripePromise;
             
             // Create checkout session
-            const response = await fetch('http://127.0.0.1:5000/api/payment/create-session', {
+            const response = await fetch('https://api.prompt2flutter.online/api/payment/create-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

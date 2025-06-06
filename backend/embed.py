@@ -70,6 +70,9 @@ Rounded corners: {hasRoundedCorners}
 
 if the code should contain images use this link as the image link for all images 'https://thumbs.dreamstime.com/b/sunset-surfers-ride-waves-maui-tropical-coastline-splashing-fun-generated-ai-sunset-surfers-ride-waves-maui-tropical-307937284.jpg' 
 
+do not use cardTheme it is no longer supported
+do not use headline1, 2, 3, 4, 5, 6 it is no longer supported
+
 Create clean, minimal but visually stunning UI with animations, custom components, shadows, rounded corners, and spacing. Use `main()` and complete structure that works in DartPad do not use state management. Avoid deprecated APIs.
 """
 
@@ -86,6 +89,9 @@ Here is the code that the user wants to edit:
 {toEdit}
 
 Now, based on the user request: "{question}", generate full Dart code using the latest Flutter and Material 3 best practices.
+
+do not use cardTheme it is no longer supported
+do not use headline1, 2, 3, 4, 5, 6 it is no longer supported
 
 Dark theme: {isDarkTheme}
 Rounded corners: {hasRoundedCorners}

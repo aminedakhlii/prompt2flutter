@@ -76,7 +76,7 @@ export default function Navbar() {
             // Get remaining requests from Firestore
             const fetchRequests = async () => {
                 try {
-                    const response = await fetch(`http://127.0.0.1:5000/api/user/requests?userId=${currentUser.id}`);
+                    const response = await fetch(`https://api.prompt2flutter.online/api/user/requests?userId=${currentUser.id}`);
                     const data = await response.json();
                     if (data.success) {
                         setRemainingRequests(data.remainingRequests);

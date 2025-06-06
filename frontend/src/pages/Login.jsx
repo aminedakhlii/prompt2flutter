@@ -173,7 +173,7 @@ export default function Login() {
                             }}>
                                 {/* REPLACE THIS WITH YOUR ACTUAL DEMO GIF/VIDEO */}
                                 <video
-                                    src="/public/demo.mp4"
+                                    src="/demo.mp4"
                                     autoPlay
                                     muted
                                     loop
@@ -224,7 +224,7 @@ export default function Login() {
                                     </Typography>
                                     <Box sx={{ mt: { xs: 2, md: 3 }, display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                         {/* REPLACE THIS WITH YOUR ACTUAL CHAT SCREENSHOT */}
-                                        <img src="/public/code generated.png" alt="Chat Interface" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
+                                        <img src="/code generated.png" alt="Chat Interface" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
                                     </Box>
                                 </Box>
                                 <Box sx={{ flexShrink: 0, fontSize: { xs: '2.5rem', md: '3rem' }, color: '#e879f9' }}>
@@ -245,7 +245,7 @@ export default function Login() {
                                     </Typography>
                                     <Box sx={{ mt: { xs: 2, md: 3 }, display: 'flex', justifyContent: { xs: 'center', md: 'flex-end' } }}>
                                         {/* REPLACE THIS WITH YOUR ACTUAL DARTPAD PREVIEW SCREENSHOT */}
-                                        <img src="/public/code preview.png" alt="DartPad Preview" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
+                                        <img src="/code preview.png" alt="DartPad Preview" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
                                     </Box>
                                 </Box>
                                 <Box sx={{ flexShrink: 0, fontSize: { xs: '2.5rem', md: '3rem' }, color: '#e879f9' }}>
@@ -266,7 +266,7 @@ export default function Login() {
                                     </Typography>
                                     <Box sx={{ mt: { xs: 2, md: 3 }, display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                         {/* REPLACE THIS WITH YOUR ACTUAL AI FIX SCREENSHOT */}
-                                        <img src="/public/code fix.png" alt="AI Fix in Action" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
+                                        <img src="/code fix.png" alt="AI Fix in Action" style={{ maxWidth: '100%', height: 'auto', borderRadius: 8, border: '1px solid rgba(192, 132, 252, 0.2)' }} />
                                     </Box>
                                 </Box>
                                 <Box sx={{ flexShrink: 0, fontSize: { xs: '2.5rem', md: '3rem' }, color: '#e879f9' }}>
